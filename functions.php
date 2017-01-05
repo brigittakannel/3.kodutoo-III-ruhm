@@ -1,6 +1,6 @@
 <?php
 	
-		require("../../config.php");
+		require("../../../config.php");
 		
 	session_start();
 	//et saab kasutada $_SESSION muutujaid

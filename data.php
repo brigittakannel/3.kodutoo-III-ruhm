@@ -23,10 +23,12 @@
 		  !empty($_POST["note"]) &&
 		  !empty($_POST["color"])
 		) {
-			
-			$note = cleanInput($_POST["note"])
-			saveNote($note, $_POST["color"]);
-		}
+		
+		$note = cleanInput($_POST["note"]);
+		
+		saveNote($note, $_POST["color"]);
+		
+	}
 
 
 	$notes = getAllNotes();
