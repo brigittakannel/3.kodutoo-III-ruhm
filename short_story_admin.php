@@ -4,6 +4,22 @@
 	session_start();
 	$database = "if16_brigitta";
 		//var_dump(hash('sha512', 'qwerty666')); exit;
+		
+	$loginEmailError = "";
+	$loginEmail = "";
+	
+	if(isset($_POST["signupEmail"])) {
+		
+	
+		if (empty ($_POST["loginEmail"])) {
+		
+			$loginEmailError = "you have to enter your email";
+			
+		} else {
+		
+			$loginEmail = $_POST["loginEmail"];
+		}
+	}
 	function login($email, $password) {
 		
 		$notice = "";
@@ -63,10 +79,10 @@ $notice = "";
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>this is where the fun begins</title>
+		<title>admin</title>
 	</head>
 	<body>
-	<h1>Log in</h1>
+	<h1>this is where the fun begins</h1>
 		
 		<p style="color:red;"><?php echo $notice; ?></p>
 		<form method="POST">
