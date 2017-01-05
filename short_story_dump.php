@@ -3,17 +3,12 @@
 		
 	session_start();
 	
-
 	$database = "if16_brigitta";
-
 	$storyError = "";
 	$story = "";
-
 	if (empty ($_POST["story"])) {
 		$storyError = "you have to write something";
 	}
-
-
 	
 	function saveStory($author, $story) {
 			
@@ -35,21 +30,13 @@
 		
 		
 	}
-
-
 function cleanInput ($input)
 {
 	$input = trim($input);
-
 	$input = stripslashes($input);
-
 	$input = htmlspecialchars($input);
-
 	return $input;
-
 }
-
-
 if(isset($_POST['author']) &&
 	isset($_POST['story']) &&
 	!empty($_POST['story'])
@@ -59,12 +46,9 @@ if(isset($_POST['author']) &&
 		} else {
 			$author = cleanInput($_POST["author"]);
 		}
-
-
 		$story = cleanInput($_POST["story"]);
 		saveStory($author, $story);
 	}
-
 function deleteStory($id) {
 	$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
 	
@@ -72,33 +56,23 @@ function deleteStory($id) {
 	
 	$stmt->execute();
 }
-
 if(isset($_POST['delete-btn'])){
 	deleteStory($_POST['story-id']);
 }
 	
 function getAllStories() 	{
-
 	$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
-
 	$stmt = $mysqli->prepare("SELECT id, author, story FROM story_dump ORDER BY id DESC");
-
 	$stmt->bind_result($id, $author, $story);
 	$stmt->execute();
-
 	$result = array();
-
-
 	while($stmt->fetch()) {
 		//echo $note."<br>";
 		//lilith
-
 		$object = new StdClass();
 		$object->id = $id;
 		$object->author = $author;
 		$object->story = $story;
-
-
 		array_push($result, $object);
 	}
 	//return $result;
@@ -115,18 +89,15 @@ function getAllStories() 	{
 		<input type="submit" name="delete-btn" value="" class="delete" style="width:25px; height:25px; background-image:url('trash.png');position: absolute;right: 0;top: 0; cursor:pointer:"> 
 		</form>
 		
-		<form method="post" action="short_story_edit.php">
-		<input type="hidden" name="story-id" value="<?=$item->id?>">
-		<input type="submit" name="edit-btn" value="edit">
+		<form method="get" action="short_story_edit.php">
+		<input type="hidden" name="storyId" value="<?=$item->id?>">
+		<input type="submit" name="edit-btn" value="edit" onclick="location.href='short_story_edit.php?storyId=<?php$item->id?>;">
 		</form>
 		
 		<?php endif;
 		echo '</div></div>';
-
 	}
 }
-
-
 /*
 if(isset($_POST['edit-btn'])){
 	updateStory($_POST['story-id'], );
@@ -143,11 +114,9 @@ if(isset($_POST['edit-btn'])){
 			$(document).ready(function() {
 				var text_max = 666;
 				$('#textarea_feedback').html(text_max + ' characters remaining');
-
 				$('#textarea').keyup(function() {
 					var text_length = $('#textarea').val().length;
 					var text_remaining = text_max - text_length;
-
 					$('#textarea_feedback').html(text_remaining + ' characters remaining');
 				});
 			});
