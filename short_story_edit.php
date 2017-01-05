@@ -42,9 +42,10 @@ function getStory($id) 	{
 //var_dump($story['story']); exit;
 }
 
-if(isset($_POST['update-btn'])) {
-	var_dump($_POST['update-btn']); exit;
+if(isset($_POST['story'])) {
+	var_dump($_POST['update-btn']); ;
 	updateStory($_POST['story-id'], $_POST['story']);
+	header('short_story_dump.php');
 }
 //var_dump($_POST); exit;
 echo '<form method="post" action="short_story_edit.php"><textarea name="story" style="width:500px; height:250px;">'.getStory($_POST['story-id']).'</textarea><br>';
