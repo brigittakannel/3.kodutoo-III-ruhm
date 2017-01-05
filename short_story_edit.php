@@ -3,6 +3,8 @@
 		
 	$database = "if16_brigitta";
 	
+$storyId = $_POST['story-id'];
+	
 function updateStory($id, $story){
  		
  		$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
@@ -15,6 +17,7 @@ function updateStory($id, $story){
  		if($stmt->execute()){
  		
  			echo "success";
+			header('short_story_dump.php');
  		}
  		
  		$stmt->close();
@@ -43,7 +46,7 @@ function getStory($id) 	{
 }
 
 if(isset($_POST['story'])) {
-	var_dump($_POST['update-btn']); ;
+	var_dump($_POST['update-btn']);
 	updateStory($_POST['story-id'], $_POST['story']);
 	header('short_story_dump.php');
 }
@@ -52,8 +55,6 @@ echo '<form method="post" action="short_story_edit.php"><textarea name="story" s
 echo '<input type="submit" name="update-btn"></form>';
 
 
-var_dump(isset($_POST)); exit;
+var_dump(isset($_POST));
 
-
-
-
+?>
